@@ -1,32 +1,26 @@
-# hue-cli
+# ngx-rocket-cli
 
-[![NPM version](https://img.shields.io/npm/v/@sinedied/hue-cli.svg)](https://www.npmjs.com/package/@sinedied/hue-cli)
-![Node version](https://img.shields.io/badge/node-%3E%3D4.0.0-brightgreen.svg)
+[![NPM version](https://img.shields.io/npm/v/@ngx-rocket/cli.svg)](https://www.npmjs.com/package/@ngx-rocket/cli)
+![Node version](https://img.shields.io/badge/node-%3E%3D6.0.0-brightgreen.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> Simple command line interface for Philips Hue.
+> Command Line Interface for Angular Rocket generators.
 
 ## Installation
 
 ```bash
-npm install -g @sinedied/hue-cli
+npm install -g @ngx-rocket/cli
 ```
 
 ### Usage
 
 ```
-Usage: hue [setup|scene|on|off]
+          __   __
+ _ _  __ _\ \./ /
+| ' \/ _` |>   <    ENTERPRISE-GRADE
+|_||_\__, /_/°\_\      ANGULAR TOOLS
+     |___/ v0.1.0
 
-Commands:
-  setup            Configure hue bridge or show current config
-    -l, --list     List bridges on the network
-    -i, --ip       Set bridge ip (use first bridge if not specified)
-    --force        Force setup if already configured
-    
-  s, scene <name>  Activate scene starting with <name>
-    -l, --list     List scenes, using <name> as optional filter
-    -m, --max <n>  Show at most <n> scenes when listing (10 by default)
-    
-  i, on            Switch all lights on  
-  o, off           Switch all lights off
+Usage: ngx [new|update|install|setup]
+
 ```
