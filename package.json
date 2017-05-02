@@ -1,0 +1,45 @@
+{
+  "name": "@ngx-rocket/cli",
+  "version": "0.1.0",
+  "description": "ngx rocket CLI tool",
+  "repository": "ngx-rocket/ngx-rocket-cli",
+  "main": "index.js",
+  "bin": {
+    "ngx": "./bin/ngx"
+  },
+  "scripts": {
+    "lint": "eslint *.js",
+    "test": "npm run lint",
+    "postpublish": "git tag -a $npm_package_version -m '$npm_package_version' && git push --tags"
+  },
+  "keywords": [
+    "ngx",
+    "rocket",
+    "angular",
+    "cli",
+    "starter",
+    "kit",
+    "generator",
+    "tool",
+    "yeoman"
+  ],
+  "author": "Yohan Lasorsa",
+  "license": "MIT",
+  "homepage": "https://github.com/ngx-rocket/ngx-rocket-cli",
+  "bugs": {
+    "url": "https://github.com/ngx-rocket/ngx-rocket-cli/issues"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "yeoman-environment": "^1.6.6"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1"
+  },
+  "peerDependencies": {
+    "generator-ngx-app": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
