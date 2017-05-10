@@ -1,11 +1,11 @@
 'use strict';
 
-const pkg = require('./package.json');
+const path = require('path');
+const child = require('child_process');
 const env = require('yeoman-environment').createEnv();
 const chalk = require('chalk');
-const os = require('os');
-const path = require('path');
-const fs = require('fs');
+const minimist = require('minimist');
+const pkg = require('./package.json');
 
 const asciiArt =
   `          ${chalk.red(`__   __`)}\n` +
@@ -15,29 +15,30 @@ const asciiArt =
   `     ${chalk.red('|___/')} v${chalk.green(pkg.version)}\n`;
 
 const appName = path.basename(process.argv[1]);
-// const configPath = path.join(os.homedir(), '.ngx-cli');
 const help =
-`Usage: ${appName} [new|update|install|setup]
+`Usage: ${appName} ${chalk.cyan(`[new|update|install|setup|list]`)} [options]
 `;
-// Commands:
-//   setup            Configure hue bridge or show current config
-//     -l, --list     List bridges on the network
-//     -i, --ip       Set bridge ip (use first bridge if not specified)
-//     --force        Force setup if already configured
-//
-//   s, scene <name>  Activate scene starting with <name>
-//     -l, --list     List scenes, using <name> as optional filter
-//     -m, --max <n>  Show at most <n> scenes when listing (10 by default)
-//     -c, --create   Create scene <name> using current lights state
-//
-//   i, on            Switch all lights on
-//   o, off           Switch all lights off
-// `;
+const detailedHelp = `
+${chalk.cyan('n, new')} [name]
+  Creates a new project in the current folder.
+
+${chalk.cyan('u, update')}
+  Updates an existing project.
+
+${chalk.cyan('l, list')}
+  Lists available add-ons.
+  -o, --online   Show installable add-ons
+`;
 
 class NgxCli {
 
   constructor(args) {
+    env.alias(/^([a-zA-Z0-9:\*]+)$/, 'ngx-rocket-addon-$1');
+
     this._args = args;
+    this._options = minimist(args, {
+      boolean: ['help']
+    });
     this._config = {};
     // this._loadConfig();
     this._runCommand();
@@ -51,6 +52,10 @@ class NgxCli {
     this._run(args, { update: true });
   }
 
+  list(args) {
+    child.execSync(`npm search ngx-rocket`, { stdio: 'inherit' });
+  }
+
   _run(args, options) {
     const mergedOptions = Object.assign({ 'skip-welcome': true }, options);
     env.lookup(() => {
@@ -61,7 +66,6 @@ class NgxCli {
   _loadConfig() {
     let config;
     try {
-      config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
       this._config = config || {};
     } catch (e) {
       // Do nothing
@@ -73,11 +77,10 @@ class NgxCli {
   }
 
   _saveConfig() {
-    fs.writeFileSync(configPath, JSON.stringify(this._config))
   }
 
-  _help() {
-    this._exit(help);
+  _help(details) {
+    this._exit(help + (details ? detailedHelp : ''));
   }
 
   _exit(error, code = 1) {
@@ -87,10 +90,21 @@ class NgxCli {
 
   _runCommand() {
     this._showLogo();
+
+    if (this._options.help) {
+      return this._help(true);
+    }
+
     switch (this._args[0]) {
       case 'n':
       case 'new':
         return this.init(this._args.slice(1));
+      case 'u':
+      case 'update':
+        return this.update(this._args.slice(1));
+      case 'l':
+      case 'list':
+        return this.list(this._args.slice(1));
       default:
         this._help();
     }
