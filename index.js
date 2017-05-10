@@ -7,17 +7,15 @@ const chalk = require('chalk');
 const minimist = require('minimist');
 const pkg = require('./package.json');
 
-const asciiArt =
-  `          ${chalk.red(`__   __`)}\n` +
-  ` ${chalk.red(`_ _  __ _\\ \\./ /`)}\n` +
-  `${chalk.red(`| ' \\/ _\` |>   <`)}    ENTERPRISE-GRADE\n` +
-  `${chalk.red(`|_||_\\__, /_/°\\_\\`)}      ANGULAR TOOLS\n` +
-  `     ${chalk.red('|___/')} v${chalk.green(pkg.version)}\n`;
-
 const appName = path.basename(process.argv[1]);
-const help =
-`Usage: ${appName} ${chalk.cyan(`[new|update|install|setup|list]`)} [options]
-`;
+const logo =
+  `          ${chalk.red(`__   __`)}\n` +
+  ` ${chalk.red(`_ _  __ _\\ \\./ /`)} ${chalk.blue(`____ ____ ____ _  _ ____ ___`)}\n` +
+  `${chalk.red(`| ' \\/ _\` |>   <`)}  ${chalk.blue(`|--< [__] |___ |-:_ |===  |`)}\n` +
+  `${chalk.red(`|_||_\\__, /_/°\\_\\`)} ${chalk.gray(`ENTERPRISE-GRADE TOOLS`)} ${chalk.yellow(`-~`)}${chalk.red(`*`)}${chalk.blue(`=>`)}\n` +
+  `     ${chalk.red('|___/')} v${pkg.version}\n`;
+
+const help = `Usage: ${appName} ${chalk.cyan(`[new|update|install|setup|list]`)} [options]\n`;
 const detailedHelp = `
 ${chalk.cyan('n, new')} [name]
   Creates a new project in the current folder.
@@ -45,6 +43,7 @@ class NgxCli {
   }
 
   init(args) {
+    this._showLogo();
     this._run(args, { update: false });
   }
 
@@ -73,13 +72,14 @@ class NgxCli {
   }
 
   _showLogo() {
-    console.log(asciiArt);
+    console.log(logo);
   }
 
   _saveConfig() {
   }
 
   _help(details) {
+    this._showLogo();
     this._exit(help + (details ? detailedHelp : ''));
   }
 
@@ -89,8 +89,6 @@ class NgxCli {
   }
 
   _runCommand() {
-    this._showLogo();
-
     if (this._options.help) {
       return this._help(true);
     }

@@ -1,4 +1,4 @@
-# ngx-rocket-cli
+# :rocket: ngx-rocket-cli
 
 [![NPM version](https://img.shields.io/npm/v/@ngx-rocket/cli.svg)](https://www.npmjs.com/package/@ngx-rocket/cli)
 ![Node version](https://img.shields.io/badge/node-%3E%3D6.0.0-brightgreen.svg)
@@ -16,11 +16,11 @@ npm install -g @ngx-rocket/cli
 
 ```
           __   __
- _ _  __ _\ \./ /
-| ' \/ _` |>   <    ENTERPRISE-GRADE
-|_||_\__, /_/°\_\      ANGULAR TOOLS
+ _ _  __ _\ \./ / ____ ____ ____ _  _ ____ ___
+| ' \/ _` |>   <  |--< [__] |___ |-:_ |===  |
+|_||_\__, /_/°\_\ ENTERPRISE-GRADE TOOLS -~*=>
      |___/ v0.1.0
 
-Usage: ngx [new|update|install|setup]
+Usage: ngx [new|update|install|setup|list] [options]
 
 ```
