@@ -77,10 +77,11 @@ class NgxCli {
     return this._findAddons()
       .then(addons => addons.filter(addon => !disabled[addon]))
       .then(addons => {
-        this._generate(args, {
+        env.lookup(() => env.run(['ngx-app'].concat(args), {
           update,
-          addons: addons.join(' ')
-        });
+          addons: addons.join(' '),
+          'skip-welcome': true
+        }));
       });
   }
 
@@ -165,13 +166,6 @@ class NgxCli {
       components[0] = path.sep;
     }
     return find(components);
-  }
-
-  _generate(args, options) {
-    const mergedOptions = Object.assign({'skip-welcome': true}, options);
-    env.lookup(() => {
-      env.run(`ngx-app ${args.join(' ')}`, mergedOptions);
-    });
   }
 
   _help(details) {
