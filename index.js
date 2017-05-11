@@ -71,7 +71,7 @@ class NgxCli {
 
   generate(update, args) {
     if (!update) {
-      asciiLogo.show(pkg.version);
+      console.log(asciiLogo(pkg.version));
     }
     const disabled = this._config.get(disabledAddons);
     return this._findAddons()
@@ -169,7 +169,7 @@ class NgxCli {
   }
 
   _help(details) {
-    asciiLogo.show(pkg.version);
+    console.log(asciiLogo(pkg.version));
     this._exit(help + (details ? detailedHelp : `Use ${chalk.white(`--help`)} for more info.\n`));
   }
 
