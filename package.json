@@ -1,7 +1,7 @@
 {
   "name": "@ngx-rocket/cli",
   "version": "0.1.0",
-  "description": "ngx rocket CLI tool",
+  "description": "CLI for ngX-Rocket generators",
   "repository": "ngx-rocket/ngx-rocket-cli",
   "main": "index.js",
   "bin": {
@@ -17,11 +17,13 @@
     "rocket",
     "angular",
     "cli",
+    "enterprise",
     "starter",
     "kit",
     "generator",
     "tool",
-    "yeoman"
+    "yeoman",
+    "awesome"
   ],
   "author": "Yohan Lasorsa",
   "license": "MIT",
@@ -35,12 +37,16 @@
     "yeoman-environment": "^1.6.6"
   },
   "devDependencies": {
-    "eslint": "^3.14.1"
+    "eslint": "^3.14.1",
+    "eslint-config-xo-space": "^0.16.0"
   },
   "peerDependencies": {
     "generator-ngx-app": "^1.0.0"
   },
   "engines": {
     "node": ">=6.0.0"
+  },
+  "eslintConfig": {
+    "extends": "xo-space/esnext"
   }
 }
