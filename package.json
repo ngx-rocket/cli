@@ -1,6 +1,6 @@
 {
   "name": "@ngx-rocket/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI for creating Angular apps with ngX-Rocket generators",
   "repository": "ngx-rocket/cli",
   "main": "index.js",
@@ -31,7 +31,7 @@
     "url": "https://github.com/ngx-rocket/cli/issues"
   },
   "dependencies": {
-    "@ngx-rocket/ascii-logo": "^1.0.0",
+    "@ngx-rocket/ascii-logo": "^1.0.1",
     "chalk": "^1.1.3",
     "conf": "^1.1.0",
     "figures": "^2.0.0",
