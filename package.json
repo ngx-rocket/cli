@@ -1,8 +1,8 @@
 {
   "name": "@ngx-rocket/cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI for creating Angular apps with ngX-Rocket generators",
-  "repository": "ngx-rocket/ngx-rocket-cli",
+  "repository": "ngx-rocket/cli",
   "main": "index.js",
   "bin": {
     "ngx": "./bin/ngx"
@@ -26,9 +26,9 @@
   ],
   "author": "Yohan Lasorsa",
   "license": "MIT",
-  "homepage": "https://github.com/ngx-rocket/ngx-rocket-cli",
+  "homepage": "https://github.com/ngx-rocket/cli",
   "bugs": {
-    "url": "https://github.com/ngx-rocket/ngx-rocket-cli/issues"
+    "url": "https://github.com/ngx-rocket/cli/issues"
   },
   "dependencies": {
     "@ngx-rocket/ascii-logo": "^1.0.0",
