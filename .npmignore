@@ -1,5 +1,7 @@
 .idea/
 test/
 .eslintrc.json
+.npmignore
 .gitignore
+.travis.yml
 npm-debug.log
