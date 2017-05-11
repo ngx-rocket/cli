@@ -3,27 +3,29 @@
 const path = require('path');
 const fs = require('fs');
 const child = require('child_process');
+const Conf = require('conf');
+const inquirer = require('inquirer');
 const env = require('yeoman-environment').createEnv();
 const chalk = require('chalk');
+const figures = require('figures');
 const minimist = require('minimist');
+const asciiLogo = require('@ngx-rocket/ascii-logo');
 const pkg = require('./package.json');
 
 const addonKey = 'ngx-rocket-addon';
+const disabledAddons = 'disabled-addons';
 const appName = path.basename(process.argv[1]);
-const logo =
-  `          ${chalk.red(`__   __`)}\n` +
-  ` ${chalk.red(`_ _  __ _\\ \\./ /`)} ${chalk.blue(`____ ____ ____ _  _ ____ ___`)}\n` +
-  `${chalk.red(`| ' \\/ _\` |>   <`)}  ${chalk.blue(`|--< [__] |___ |-:_ |===  |`)}\n` +
-  `${chalk.red(`|_||_\\__, /_/°\\_\\`)} ENTERPRISE-GRADE TOOLS ${chalk.yellow(`-~`)}${chalk.red(`*`)}${chalk.blue(`=>`)}\n` +
-  `     ${chalk.red('|___/')} v${pkg.version}\n`;
-
-const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|install|setup|list]`)} [options]\n`;
+const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|config|list]`)} [options]\n`;
 const detailedHelp = `
 ${chalk.blue('n, new')} [name]
-  Creates a new project in the current folder.
+  Creates a new app.
 
 ${chalk.blue('u, update')}
-  Updates an existing project.
+  Updates an existing app.
+
+${chalk.blue('c, config')}
+  Configures add-ons to use for new apps.
+  All available add-ons are used by default.
 
 ${chalk.blue('l, list')}
   Lists available add-ons.
@@ -36,8 +38,11 @@ class NgxCli {
     this._args = args;
     this._options = minimist(args, {
       boolean: ['help', 'npm'],
-      alias: {
-        n: 'npm'
+      alias: {n: 'npm'}
+    });
+    this._config = new Conf({
+      defaults: {
+        disabledAddons: {}
       }
     });
   }
@@ -49,10 +54,13 @@ class NgxCli {
     switch (this._args[0]) {
       case 'n':
       case 'new':
-        return this.init(this._args.slice(1));
+        return this.generate(false, this._args.slice(1));
       case 'u':
       case 'update':
-        return this.update(this._args.slice(1));
+        return this.generate(true, this._args.slice(1));
+      case 'c':
+      case 'config':
+        return this.configure();
       case 'l':
       case 'list':
         return this.list(this._options.npm);
@@ -61,13 +69,44 @@ class NgxCli {
     }
   }
 
-  init(args) {
-    this._showLogo();
-    this._generate(args, {update: false});
+  generate(update, args) {
+    if (!update) {
+      asciiLogo.show(pkg.version);
+    }
+    const disabled = this._config.get(disabledAddons);
+    return this._findAddons()
+      .then(addons => addons.filter(addon => !disabled[addon]))
+      .then(addons => {
+        this._generate(args, {
+          update,
+          addons: addons.join(' ')
+        });
+      });
   }
 
-  update(args) {
-    this._generate(args, {update: true});
+  configure() {
+    this._findAddons().then(addons => {
+      const disabled = this._config.get(disabledAddons);
+      inquirer
+        .prompt({
+          type: 'checkbox',
+          name: 'addons',
+          message: 'Choose add-ons to use for new apps',
+          choices: addons.map(addon => ({
+            name: addon,
+            checked: !disabled[addon]
+          }))
+        })
+        .then(answers => {
+          this._config.set(disabledAddons, addons
+            .filter(addon => !answers.addons.includes(addon))
+            .reduce((r, addon) => {
+              r[addon] = true;
+              return r;
+            }, {}));
+          console.log('Configuration saved.');
+        });
+    });
   }
 
   list(npm) {
@@ -80,6 +119,7 @@ class NgxCli {
       promise = this._findAddons();
     }
     promise.then(addons => {
+      const disabled = this._config.get(disabledAddons);
       console.log(chalk.blue(`Available add-ons${npm ? ' on NPM' : ''}:`));
 
       if (!addons.length) {
@@ -87,7 +127,7 @@ class NgxCli {
       } else if (npm) {
         addons.forEach(addon => console.log(`  ${addon.name}@${addon.version} - ${addon.description}`));
       } else {
-        addons.forEach(addon => console.log(`  ${addon.namespace.replace(/(.*?):app$/, '$1')}`));
+        addons.forEach(addon => console.log(`${chalk.green(disabled[addon] ? ' ' : figures.tick)} ${addon}`));
       }
     });
   }
@@ -102,7 +142,8 @@ class NgxCli {
             const packagePath = this._findPackageJson(generator.resolved);
             const keywords = require(packagePath).keywords || [];
             return keywords.includes(addonKey);
-          });
+          })
+          .map(generator => generator.namespace.replace(/(.*?):app$/, '$1'));
         resolve(addons);
       });
     });
@@ -133,12 +174,8 @@ class NgxCli {
     });
   }
 
-  _showLogo() {
-    console.log(logo);
-  }
-
   _help(details) {
-    this._showLogo();
+    asciiLogo.show(pkg.version);
     this._exit(help + (details ? detailedHelp : `Use ${chalk.white(`--help`)} for more info.\n`));
   }
 
@@ -149,7 +186,4 @@ class NgxCli {
 
 }
 
-const cli = new NgxCli(process.argv.slice(2));
-cli.run();
-
-exports = NgxCli;
+module.exports = NgxCli;
