@@ -72,6 +72,8 @@ class NgxCli {
   generate(update, args) {
     if (!update) {
       console.log(asciiLogo(pkg.version));
+    } else if (!fs.existsSync('.yo-rc.json')) {
+      this._exit(`No existing app found, use ${chalk.blue('ngx new')} instead`);
     }
     const disabled = this._config.get(disabledAddons);
     return this._findAddons()
