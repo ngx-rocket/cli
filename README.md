@@ -21,7 +21,7 @@ npm install -g @ngx-rocket/cli
  _ _  __ _\ \./ / ____ ____ ____ _  _ ____ ___
 | ' \/ _` |>   <  |--< [__] |___ |-:_ |===  |
 |_||_\__, /_/°\_\ ENTERPRISE APP STARTER -~*=>
-     |___/ v1.0.1
+     |___/ v1.0.2
 
 Usage: ngx [new|update|config|list] [options]
 
