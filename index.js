@@ -79,7 +79,7 @@ class NgxCli {
     return this._findAddons()
       .then(addons => addons.filter(addon => !disabled[addon]))
       .then(addons => {
-        env.lookup(() => env.run(['ngx-app'].concat(args), {
+        env.lookup(() => env.run(['ngx-rocket'].concat(args), {
           update,
           addons: addons.join(' '),
           'skip-welcome': true
