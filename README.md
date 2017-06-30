@@ -8,6 +8,13 @@
 
 > CLI for creating Angular apps with ngX-Rocket generators.
 
+Why using this CLI instead of directly using our awesome
+[ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket)?
+
+Because it's simpler and allows you to leverage wonderful
+[ngX Rocket add-ons](https://www.npmjs.com/search?q=ngx-rocket-addon) or even
+[make your very own](https://github.com/ngx-rocket/generator-ngx-rocket-addon)!
+
 ## Installation
 
 ```bash
@@ -22,7 +29,7 @@ ngx --help
  _ _  __ _\ \./ / ____ ____ ____ _  _ ____ ___
 | ' \/ _` |>   <  |--< [__] |___ |-:_ |===  |
 |_||_\__, /_/°\_\ ENTERPRISE APP STARTER -~*=>
-     |___/ v1.0.3
+     |___/
 
 Usage: ngx [new|update|config|list] [options]
 
