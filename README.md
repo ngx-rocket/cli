@@ -10,10 +10,11 @@
 
 Why using this CLI instead of directly using our awesome
 [ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket)?
-
 Because it's simpler and allows you to leverage wonderful
 [ngX Rocket add-ons](https://www.npmjs.com/search?q=ngx-rocket-addon) or even
 [make your very own](https://github.com/ngx-rocket/generator-ngx-rocket-addon)!
+
+And there's more to come, stay tuned... :wink:
 
 ## Installation
 
