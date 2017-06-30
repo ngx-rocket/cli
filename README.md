@@ -41,7 +41,7 @@ l, list
   -n, --npm   Show installable add-ons on NPM
 ```
 
-## Generating and serving an Angular project via a development server
+## Generating and serving a project via a development server
 
 ```bash
 ngx new <project-name>
