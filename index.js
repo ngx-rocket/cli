@@ -33,7 +33,6 @@ ${chalk.blue('l, list')}
 `;
 
 class NgxCli {
-
   constructor(args) {
     this._args = args;
     this._options = minimist(args, {
@@ -179,7 +178,6 @@ class NgxCli {
     console.error(error);
     process.exit(code);
   }
-
 }
 
 module.exports = NgxCli;
