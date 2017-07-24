@@ -37,6 +37,7 @@
     "figures": "^2.0.0",
     "inquirer": "^3.0.6",
     "minimist": "^1.2.0",
+    "update-notifier": "^2.2.0",
     "yeoman-environment": "^2.0.0"
   },
   "devDependencies": {

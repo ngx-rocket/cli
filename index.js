@@ -9,6 +9,7 @@ const env = require('yeoman-environment').createEnv();
 const chalk = require('chalk');
 const figures = require('figures');
 const minimist = require('minimist');
+const updateNotifier = require('update-notifier');
 const asciiLogo = require('@ngx-rocket/ascii-logo');
 const pkg = require('./package.json');
 
@@ -47,6 +48,8 @@ class NgxCli {
   }
 
   run() {
+    updateNotifier({pkg}).notify();
+
     if (this._options.help) {
       return this._help(true);
     }
