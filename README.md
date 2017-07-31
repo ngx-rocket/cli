@@ -18,27 +18,28 @@ And there's more to come, stay tuned... :wink:
 
 ## Installation
 
-```bash
+```sh
 npm install -g @ngx-rocket/cli
 ```
 
 ## Usage
 
-```bash
+```sh
 ngx --help
           __   __
  _ _  __ _\ \./ / ____ ____ ____ _  _ ____ ___
 | ' \/ _` |>   <  |--< [__] |___ |-:_ |===  |
 |_||_\__, /_/°\_\ ENTERPRISE APP STARTER -~*=>
-     |___/
+     |___/ v1.1.0
 
 Usage: ngx [new|update|config|list] [options]
 
 n, new [name]
   Creates a new app.
+  -a, --addon  Creates an add-on instead.
 
 u, update
-  Updates an existing app.
+  Updates an existing app or add-on.
 
 c, config
   Configures add-ons to use for new apps.
@@ -46,14 +47,13 @@ c, config
 
 l, list
   Lists available add-ons.
-  -n, --npm   Show installable add-ons on NPM
+  -n, --npm    Show installable add-ons on NPM
 ```
 
 ## Generating and serving a project via a development server
 
-```bash
-ngx new <project-name>
-cd <project-name>
+```sh
+ngx new
 npm start
 ```
 
@@ -66,7 +66,7 @@ To get more information about generated project, see
 ## Updating an existing project
 
 Make you have no uncommited changes in your project folder, then:
-```bash
+```sh
 ngx update
 ```
 
@@ -74,6 +74,10 @@ The simplest and safest way is then to overwrite everything in case of conflict,
 changes one file at once.
 
 ## Managing add-ons
+
+ngX-Rocket add-ons are additional generators running on top of
+[ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket) that complement or modify the project
+template.
 
 ### Listing available add-ons
 
@@ -85,6 +89,11 @@ To show add-ons available for installation, use `npm list --npm`.
 
 By default all installed add-ons are used for new projects.
 However, you selectively enable or disable add-ons using `ngx config`.
+
+### Creating a new add-on
+
+You can use the command `ngx new --addon` to create a new ngX-Rocket add-on.
+See [ngx-rocket/core](https://github.com/ngx-rocket/core) for the complete documentation about add-on creation.
 
 # License
 
