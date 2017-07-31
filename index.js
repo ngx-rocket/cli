@@ -78,11 +78,11 @@ class NgxCli {
   generate(update, args, addon) {
     if (!update) {
       console.log(asciiLogo(pkg.version));
-    } else if (!fs.existsSync('.yo-rc.json')) {
-      this._exit(`No existing app found, use ${chalk.blue('ngx new')} instead`);
-    } else {
+    } else if (fs.existsSync('.yo-rc.json')) {
       const rc = JSON.parse(fs.readFileSync('.yo-rc.json'));
       addon = Boolean(rc['generator-ngx-rocket-addon']);
+    } else {
+      this._exit(`No existing app found, use ${chalk.blue('ngx new')} instead`);
     }
     if (addon) {
       args = args.filter(arg => arg !== '--addon' && arg !== '-a');
