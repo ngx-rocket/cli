@@ -20,9 +20,10 @@ const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|confi
 const detailedHelp = `
 ${chalk.blue('n, new')} [name]
   Creates a new app.
+  -a, --addon  Creates an add-on instead.
 
 ${chalk.blue('u, update')}
-  Updates an existing app.
+  Updates an existing app or add-on.
 
 ${chalk.blue('c, config')}
   Configures add-ons to use for new apps.
@@ -30,15 +31,18 @@ ${chalk.blue('c, config')}
 
 ${chalk.blue('l, list')}
   Lists available add-ons.
-  -n, --npm   Show installable add-ons on NPM
+  -n, --npm    Show installable add-ons on NPM
 `;
 
 class NgxCli {
   constructor(args) {
     this._args = args;
     this._options = minimist(args, {
-      boolean: ['help', 'npm'],
-      alias: {n: 'npm'}
+      boolean: ['help', 'npm', 'addon'],
+      alias: {
+        n: 'npm',
+        a: 'addon'
+      }
     });
     this._config = new Conf({
       defaults: {
@@ -56,10 +60,10 @@ class NgxCli {
     switch (this._args[0]) {
       case 'n':
       case 'new':
-        return this.generate(false, this._args.slice(1));
+        return this.generate(false, this._args.slice(1), this._options.addon);
       case 'u':
       case 'update':
-        return this.generate(true, this._args.slice(1));
+        return this.generate(true, this._args.slice(1), this._options.addon);
       case 'c':
       case 'config':
         return this.configure();
@@ -71,22 +75,33 @@ class NgxCli {
     }
   }
 
-  generate(update, args) {
+  generate(update, args, addon) {
     if (!update) {
       console.log(asciiLogo(pkg.version));
     } else if (!fs.existsSync('.yo-rc.json')) {
       this._exit(`No existing app found, use ${chalk.blue('ngx new')} instead`);
+    } else {
+      const rc = JSON.parse(fs.readFileSync('.yo-rc.json'));
+      addon = Boolean(rc['generator-ngx-rocket-addon']);
     }
-    const disabled = this._config.get(disabledAddons);
-    return this._findAddons()
-      .then(addons => addons.filter(addon => !disabled[addon]))
-      .then(addons => {
-        env.lookup(() => env.run(['ngx-rocket'].concat(args), {
-          update,
-          addons: addons.join(' '),
-          'skip-welcome': true
-        }));
-      });
+    if (addon) {
+      args = args.filter(arg => arg !== '--addon' && arg !== '-a');
+      env.lookup(() => env.run(['ngx-rocket-addon'].concat(args), {
+        update,
+        'skip-welcome': true
+      }));
+    } else {
+      const disabled = this._config.get(disabledAddons);
+      return this._findAddons()
+        .then(addons => addons.filter(addon => !disabled[addon]))
+        .then(addons => {
+          env.lookup(() => env.run(['ngx-rocket'].concat(args), {
+            update,
+            addons: addons.join(' '),
+            'skip-welcome': true
+          }));
+        });
+    }
   }
 
   configure() {
