@@ -119,7 +119,8 @@ class NgxCli {
     if (npm) {
       promise = Promise
         .resolve(child.execSync(`npm search ${addonKey} --json`, {stdio: [0, null, 2]}))
-        .then(addons => addons ? JSON.parse(addons) : []);
+        .then(addons => addons ? JSON.parse(addons) : [])
+        .then(addons => addons.filter(addon => addon.name !== 'generator-ngx-rocket-addon'));
     } else {
       promise = this._findAddons();
     }
