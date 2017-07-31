@@ -1,6 +1,6 @@
 {
   "name": "@ngx-rocket/cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "CLI for creating Angular apps with ngX-Rocket generators",
   "repository": "ngx-rocket/cli",
   "main": "index.js",

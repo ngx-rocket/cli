@@ -1,3 +1,8 @@
+# 1.2.0
+- Added `--addon` generator option to the `new` command (https://github.com/ngx-rocket/generator-ngx-rocket/issues/91)
+- Moved `generator-ngx-rocket` to `dependencies` instead of `peerDependencies`
+- Removed add-on generator from the list of npm add-ons
+
 # 1.1.0
 - Added update notification (https://github.com/ngx-rocket/generator-ngx-rocket/issues/96)
 - Updated dependencies
