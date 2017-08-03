@@ -1,3 +1,6 @@
+# 1.2.2
+- Updated `generator-ngx-rocket` version 
+
 # 1.2.1
 - Updated readme
 
