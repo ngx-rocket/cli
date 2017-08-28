@@ -50,8 +50,8 @@ class NgxCli {
       }
     });
 
-    env.register(require('generator-ngx-rocket'));
-    env.register(require('generator-ngx-rocket-addon'));
+    env.register(require.resolve('generator-ngx-rocket'), 'ngx-rocket');
+    env.register(require.resolve('generator-ngx-rocket-addon'), 'ngx-rocket-addon');
   }
 
   run() {
