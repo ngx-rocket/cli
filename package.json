@@ -8,13 +8,15 @@
     "ngx": "./bin/ngx"
   },
   "scripts": {
-    "test": "eslint *.js",
+    "lint": "eslint *.js",
+    "test": "npm run lint -s && ./test/test.sh",
     "postpublish": "git tag -a $npm_package_version -m '$npm_package_version' && git push --tags"
   },
   "keywords": [
     "ngx",
     "rocket",
     "angular",
+    "ionic",
     "cli",
     "enterprise",
     "starter",
@@ -22,6 +24,7 @@
     "generator",
     "tool",
     "yeoman",
+    "add-on",
     "awesome"
   ],
   "author": "Yohan Lasorsa",
