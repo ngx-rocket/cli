@@ -30,7 +30,7 @@ ngx --help
  _ _  __ _\ \./ / ____ ____ ____ _  _ ____ ___
 | ' \/ _` |>   <  |--< [__] |___ |-:_ |===  |
 |_||_\__, /_/°\_\ ENTERPRISE APP STARTER -~*=>
-     |___/ v1.2.1
+     |___/
 
 Usage: ngx [new|update|config|list] [options]
 
