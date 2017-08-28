@@ -49,6 +49,9 @@ class NgxCli {
         disabledAddons: {}
       }
     });
+
+    env.register(require('generator-ngx-rocket'));
+    env.register(require('generator-ngx-rocket-addon'));
   }
 
   run() {
