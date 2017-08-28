@@ -1,3 +1,7 @@
+# 1.2.3
+- Fixed generators having to be installed separately from the CLI
+- Added tests
+
 # 1.2.2
 - Updated `generator-ngx-rocket` version 
 
