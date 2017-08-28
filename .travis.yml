@@ -7,6 +7,9 @@ node_js:
 matrix:
   fast_finish: true
 
+addons:
+  chrome: stable
+
 install:
   - npm install
   - npm link
