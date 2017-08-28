@@ -1,3 +1,6 @@
+sudo: required
+dist: trusty
+
 language: node_js
 node_js:
   - 'node'
@@ -6,3 +9,15 @@ node_js:
 
 matrix:
   fast_finish: true
+
+addons:
+  chrome: stable
+
+install:
+  - npm install
+  - npm link
+
+before_script:
+  - export DBUS_SESSION_BUS_ADDRESS=/dev/null
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
