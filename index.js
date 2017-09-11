@@ -13,10 +13,11 @@ const updateNotifier = require('update-notifier');
 const asciiLogo = require('@ngx-rocket/ascii-logo');
 const pkg = require('./package.json');
 
+const isWin = /^win/.test(process.platform);
 const addonKey = 'ngx-rocket-addon';
 const disabledAddons = 'disabled-addons';
 const appName = path.basename(process.argv[1]);
-const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|config|list]`)} [options]\n`;
+const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|config|list|<script>]`)} [options]\n`;
 const detailedHelp = `
 ${chalk.blue('n, new')} [name]
   Creates a new app.
@@ -32,6 +33,10 @@ ${chalk.blue('c, config')}
 ${chalk.blue('l, list')}
   Lists available add-ons.
   -n, --npm    Show installable add-ons on NPM
+  
+${chalk.blue('<script>')}
+  Runs specified script from your ${chalk.bold(`package.json`)}.
+  Works just like ${chalk.bold(`npm run <script>`)}
 `;
 
 class NgxCli {
@@ -74,8 +79,22 @@ class NgxCli {
       case 'list':
         return this.list(this._options.npm);
       default:
-        this._help();
+        this.runScript(this._args);
     }
+  }
+
+  runScript(args) {
+    const name = args[0];
+    const packageFile = this._findPackageJson(process.cwd());
+    const projectPackage = packageFile ? require(packageFile) : null;
+    if (!projectPackage || !projectPackage.scripts[name]) {
+      this._help();
+    }
+
+    child.spawnSync('npm', ['run'].concat(args), {
+      stdio: 'inherit',
+      shell: isWin
+    });
   }
 
   generate(update, args, addon) {
