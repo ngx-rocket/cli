@@ -32,7 +32,7 @@ ngx --help
 |_||_\__, /_/°\_\ ENTERPRISE APP STARTER -~*=>
      |___/
 
-Usage: ngx [new|update|config|list] [options]
+Usage: ngx [new|update|config|list|<script>] [options]
 
 n, new [name]
   Creates a new app.
@@ -48,6 +48,10 @@ c, config
 l, list
   Lists available add-ons.
   -n, --npm    Show installable add-ons on NPM
+  
+<script>
+  Runs specified script from your package.json.
+  Works just like npm run <script>
 ```
 
 ## Generating and serving a project via a development server
@@ -94,6 +98,11 @@ However, you selectively enable or disable add-ons using `ngx config`.
 
 You can use the command `ngx new --addon` to create a new ngX-Rocket add-on.
 See [ngx-rocket/core](https://github.com/ngx-rocket/core) for the complete documentation about add-on creation.
+
+### Running scripts from `package.json`
+
+In a generated project folder, you can use the command `ngx <script>` to run any `package.json` script.
+This is only a convenience shortcut, it works exactly like `npm run <script>`. 
 
 # License
 

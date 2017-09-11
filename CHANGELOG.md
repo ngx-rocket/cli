@@ -1,3 +1,6 @@
+# 1.3.0
+- Added package.json scripts execution (https://github.com/ngx-rocket/generator-ngx-rocket/issues/97)
+
 # 1.2.3
 - Fixed generators having to be installed separately from the CLI
 - Added tests
