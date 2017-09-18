@@ -1,7 +1,10 @@
-.idea/
-test/
+/.idea/
+/test/
+/sample/
 .eslintrc.json
 .npmignore
 .gitignore
 .travis.yml
 npm-debug.log
+.DS_Store
+Thumbs.db
