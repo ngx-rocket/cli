@@ -1,3 +1,6 @@
+# 1.3.1
+- Bumped generator version
+
 # 1.3.0
 - Added package.json scripts execution (https://github.com/ngx-rocket/generator-ngx-rocket/issues/97)
 
