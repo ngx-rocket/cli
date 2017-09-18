@@ -117,13 +117,13 @@ class NgxCli {
       return this._findAddons()
         .then(addons => addons.filter(addon => !disabled[addon]))
         .then(addons => {
-          env.lookup(() => env.run(['ngx-rocket'].concat(args), {
-            update,
-            addons: addons.join(' '),
-            'skip-welcome': true
-          }));
+          return new Promise(resolve => env.lookup(() => env.run(['ngx-rocket'].concat(args), {
+              update,
+              addons: addons.join(' '),
+              'skip-welcome': true
+            }, resolve)));
         })
-        .then(() => console.log('\n'));
+        .then(() => console.log());
     }
   }
 
