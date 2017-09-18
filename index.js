@@ -122,7 +122,8 @@ class NgxCli {
             addons: addons.join(' '),
             'skip-welcome': true
           }));
-        });
+        })
+        .then(() => console.log('\n'));
     }
   }
 
