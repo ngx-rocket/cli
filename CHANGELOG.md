@@ -1,3 +1,6 @@
+# 1.3.2
+- Bumped generators version
+
 # 1.3.1
 - Bumped generator version
 
