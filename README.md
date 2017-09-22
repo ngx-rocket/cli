@@ -99,7 +99,7 @@ However, you selectively enable or disable add-ons using `ngx config`.
 You can use the command `ngx new --addon` to create a new ngX-Rocket add-on.
 See [ngx-rocket/core](https://github.com/ngx-rocket/core) for the complete documentation about add-on creation.
 
-### Running scripts from `package.json`
+## Running scripts from `package.json`
 
 In a generated project folder, you can use the command `ngx <script>` to run any `package.json` script.
 This is only a convenience shortcut, it works exactly like `npm run <script>`. 
