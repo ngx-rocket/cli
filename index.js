@@ -91,7 +91,7 @@ class NgxCli {
       this._help();
     }
 
-    child.spawnSync('npm', ['run'].concat(args), {
+    child.spawnSync('npm', ['run', name, '--'].concat(args.splice(1)), {
       stdio: 'inherit',
       shell: isWin
     });
