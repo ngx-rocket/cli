@@ -1,3 +1,7 @@
+# 1.4.0
+- Removed the need for `--` to pass-through arguments when executing `package.json` scripts
+- Bumped generators version
+
 # 1.3.2
 - Bumped generators version
 
@@ -5,7 +9,7 @@
 - Bumped generator version
 
 # 1.3.0
-- Added package.json scripts execution (https://github.com/ngx-rocket/generator-ngx-rocket/issues/97)
+- Added `package.json` scripts execution (https://github.com/ngx-rocket/generator-ngx-rocket/issues/97)
 
 # 1.2.3
 - Fixed generators having to be installed separately from the CLI
