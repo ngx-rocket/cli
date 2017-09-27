@@ -102,7 +102,15 @@ See [ngx-rocket/core](https://github.com/ngx-rocket/core) for the complete docum
 ## Running scripts from `package.json`
 
 In a generated project folder, you can use the command `ngx <script>` to run any `package.json` script.
-This is only a convenience shortcut, it works exactly like `npm run <script>`. 
+This is only a convenience shortcut, it works exactly like `npm run <script>`, except that you do need to add `--` to
+pass arguments to the underlying command.
+
+For example in a ngX-Rocket project you can use these commands:
+```sh
+ngx start --env=prod
+ngx generate component myComponent --module myModule
+ngx build --build-optimizer
+```
 
 # License
 
