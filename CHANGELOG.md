@@ -1,3 +1,6 @@
+# 1.5.0
+- Scripts can now be run using only their name's first letters
+
 # 1.4.0
 - Removed the need for `--` to pass-through arguments when executing `package.json` scripts
 - Bumped generators version
