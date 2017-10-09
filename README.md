@@ -6,6 +6,8 @@
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+![cli logo](https://user-images.githubusercontent.com/593151/31329388-2f1dc5c8-acda-11e7-9f37-e5b8cc17353c.png)
+
 > CLI for creating Angular apps with ngX-Rocket generators.
 
 Why using this CLI instead of directly using our awesome
