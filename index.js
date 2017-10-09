@@ -87,11 +87,23 @@ class NgxCli {
     const name = args[0];
     const packageFile = this._findPackageJson(process.cwd());
     const projectPackage = packageFile ? require(packageFile) : null;
-    if (!projectPackage || !projectPackage.scripts[name]) {
+    if (!projectPackage) {
       this._help();
     }
 
-    child.spawnSync('npm', ['run', name, '--'].concat(args.splice(1)), {
+    let scriptName = name;
+    if (!projectPackage.scripts[name]) {
+      const matches = this._findMatches(name, Object.keys(projectPackage.scripts));
+      if (!matches) {
+        this._help();
+      }
+      scriptName = matches[0];
+      if (matches.length > 1) {
+        console.warn(chalk.yellow(`Warning, multiple matching scripts. Try to be more specific.`));
+      }
+    }
+
+    child.spawnSync('npm', ['run', scriptName, '--'].concat(args.splice(1)), {
       stdio: 'inherit',
       shell: isWin
     });
@@ -214,6 +226,16 @@ class NgxCli {
   _help(details) {
     console.log(asciiLogo(pkg.version));
     this._exit(help + (details ? detailedHelp : `Use ${chalk.white(`--help`)} for more info.\n`));
+  }
+
+  _findMatches(search, strings) {
+    const matches = [];
+    for (const s of strings) {
+      if (s.startsWith(search)) {
+        matches.push(s);
+      }
+    }
+    return matches.length > 0 ? matches : null;
   }
 
   _exit(error, code = 1) {
