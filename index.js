@@ -228,10 +228,9 @@ class NgxCli {
     this._exit(help + (details ? detailedHelp : `Use ${chalk.white(`--help`)} for more info.\n`));
   }
 
-
   _findMatches(search, strings) {
     const matches = [];
-    for (let s of strings) {
+    for (const s of strings) {
       if (s.startsWith(search)) {
         matches.push(s);
       }
