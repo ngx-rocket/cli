@@ -2,6 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/@ngx-rocket/cli.svg)](https://www.npmjs.com/package/@ngx-rocket/cli)
 [![Build status](https://img.shields.io/travis/ngx-rocket/cli/master.svg)](https://travis-ci.org/ngx-rocket/cli)
+[![Windows build status](https://ci.appveyor.com/api/projects/status/github/ngx-rocket/cli?svg=true&branch=master)](https://ci.appveyor.com/project/sinedied/cli/branch/master)
 ![Node version](https://img.shields.io/badge/node-%3E%3D6.0.0-brightgreen.svg)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -10,13 +11,11 @@
 
 > CLI for creating Angular apps with ngX-Rocket generators.
 
-Why using this CLI instead of directly using our awesome
-[ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket)?
-Because it's simpler and allows you to leverage wonderful
-[ngX Rocket add-ons](https://www.npmjs.com/search?q=ngx-rocket-addon) or even
-[make your very own](https://github.com/ngx-rocket/generator-ngx-rocket-addon)!
-
-And there's more to come, stay tuned... :wink:
+Leverage [ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket) with community
+[add-ons](https://www.npmjs.com/search?q=ngx-rocket-addon) and improve your **developer experience**.
+From scaffolding to deployment, use this CLI to accelerate your workflow.
+You can also [make your very own add-on](https://github.com/ngx-rocket/generator-ngx-rocket-addon) directly from the
+CLI, to make your next project even faster! 
 
 ## Installation
 
