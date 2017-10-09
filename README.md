@@ -112,6 +112,16 @@ ngx generate component myComponent --module myModule
 ngx build --build-optimizer
 ```
 
+Instead of typing the full script name, you can also type only the first letters:
+```sh
+ngx s --env=prod
+ngx g component myComponent --module myModule
+ngx b --build-optimizer
+```
+
+If there is more than one script matching, the first one will be used.
+You can then use any number of additional letters to discriminate the script you want to run.
+
 # License
 
 [MIT](LICENSE)
