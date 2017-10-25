@@ -1,3 +1,6 @@
+# 1.5.1
+- Bumped generators version
+
 # 1.5.0
 - Scripts can now be run using only their name's first letters
 
