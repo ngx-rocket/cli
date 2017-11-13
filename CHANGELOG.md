@@ -1,3 +1,6 @@
+# 1.5.2
+- Bumped generators version
+
 # 1.5.1
 - Bumped generators version
 
