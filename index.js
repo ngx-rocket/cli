@@ -21,9 +21,10 @@ const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|confi
 const detailedHelp = `
 ${chalk.blue('n, new')} [name]
   Creates a new app.
-  -a, --addon  Creates an add-on instead.
-  --yarn       Uses Yarn instead of NPM as package manager
-
+  -a, --addon                 Creates an add-on instead.
+  --packageManager <yarn|npm> Uses specified package manager.
+  --automate <json_file>      Automate prompt answers using JSON file.
+  
 ${chalk.blue('u, update')}
   Updates an existing app or add-on.
 
@@ -44,7 +45,7 @@ class NgxCli {
   constructor(args) {
     this._args = args;
     this._options = minimist(args, {
-      boolean: ['help', 'npm', 'addon', 'yarn'],
+      boolean: ['help', 'npm', 'addon', 'packageManager'],
       alias: {
         n: 'npm',
         a: 'addon'
@@ -232,8 +233,8 @@ class NgxCli {
   }
 
   _packageManager() {
-    if (this._options.yarn) {
-      return 'yarn';
+    if (this._options.packageManager) {
+      return this._options.packageManager === 'yarn' ? 'yarn' : 'npm';
     }
     let pm = null;
     try {
