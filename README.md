@@ -37,7 +37,9 @@ Usage: ngx [new|update|config|list|<script>] [options]
 
 n, new [name]
   Creates a new app.
-  -a, --addon  Creates an add-on instead.
+  -a, --addon                 Creates an add-on instead.
+  --packageManager <yarn|npm> Uses specified package manager.
+  --automate <json_file>      Automate prompt answers using JSON file.
 
 u, update
   Updates an existing app or add-on.
@@ -68,9 +70,12 @@ The app will automatically reload if you change any of the source files.
 To get more information about generated project, see
 [ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket).
 
+> Note: any [ngX-Rocket generator option](https://github.com/ngx-rocket/generator-ngx-rocket#generator-options) can be
+> used with `ngx new` or `ngx update`.
+
 ## Updating an existing project
 
-Make you have no uncommited changes in your project folder, then:
+Make you have no uncommitted changes in your project folder, then:
 ```sh
 ngx update
 ```

@@ -21,8 +21,10 @@ const help = `${chalk.bold(`Usage:`)} ${appName} ${chalk.blue(`[new|update|confi
 const detailedHelp = `
 ${chalk.blue('n, new')} [name]
   Creates a new app.
-  -a, --addon  Creates an add-on instead.
-
+  -a, --addon                 Creates an add-on instead.
+  --packageManager <yarn|npm> Uses specified package manager.
+  --automate <json_file>      Automate prompt answers using JSON file.
+  
 ${chalk.blue('u, update')}
   Updates an existing app or add-on.
 
@@ -43,7 +45,7 @@ class NgxCli {
   constructor(args) {
     this._args = args;
     this._options = minimist(args, {
-      boolean: ['help', 'npm', 'addon'],
+      boolean: ['help', 'npm', 'addon', 'packageManager'],
       alias: {
         n: 'npm',
         a: 'addon'
@@ -86,6 +88,7 @@ class NgxCli {
   runScript(args) {
     const name = args[0];
     const packageFile = this._findPackageJson(process.cwd());
+    const packageManager = this._packageManager();
     const projectPackage = packageFile ? require(packageFile) : null;
     if (!projectPackage) {
       this._help();
@@ -103,10 +106,14 @@ class NgxCli {
       }
     }
 
-    child.spawnSync('npm', ['run', scriptName, '--'].concat(args.splice(1)), {
-      stdio: 'inherit',
-      shell: isWin
-    });
+    child.spawnSync(
+      packageManager,
+      ['run', scriptName].concat(packageManager === 'npm' ? ['--'] : [], args.splice(1)),
+      {
+        stdio: 'inherit',
+        shell: isWin
+      }
+    );
   }
 
   generate(update, args, addon) {
@@ -122,6 +129,7 @@ class NgxCli {
       args = args.filter(arg => arg !== '--addon' && arg !== '-a');
       env.lookup(() => env.run(['ngx-rocket-addon'].concat(args), {
         update,
+        packageManager: this._packageManager(),
         'skip-welcome': true
       }));
     } else {
@@ -131,6 +139,7 @@ class NgxCli {
         .then(addons => {
           return new Promise(resolve => env.lookup(() => env.run(['ngx-rocket'].concat(args), {
             update,
+            packageManager: this._packageManager(),
             addons: addons.join(' '),
             'skip-welcome': true
           }, resolve)));
@@ -221,6 +230,20 @@ class NgxCli {
       components[0] = path.sep;
     }
     return find(components);
+  }
+
+  _packageManager() {
+    if (this._options.packageManager) {
+      return this._options.packageManager === 'yarn' ? 'yarn' : 'npm';
+    }
+    let pm = null;
+    try {
+      const rc = require(path.join(process.cwd(), '.yo-rc.json'));
+      pm = rc['generator-ngx-rocket'].props.packageManager;
+    } catch (err) {
+      // Do nothing
+    }
+    return pm || process.env.NGX_PACKAGE_MANAGER || 'npm';
   }
 
   _help(details) {
