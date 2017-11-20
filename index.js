@@ -58,7 +58,6 @@ class NgxCli {
     });
 
     env.register(require.resolve('generator-ngx-rocket'), 'ngx-rocket');
-    env.register(require.resolve('generator-ngx-rocket-addon'), 'ngx-rocket-addon');
   }
 
   run() {
@@ -121,13 +120,13 @@ class NgxCli {
       console.log(asciiLogo(pkg.version));
     } else if (fs.existsSync('.yo-rc.json')) {
       const rc = JSON.parse(fs.readFileSync('.yo-rc.json'));
-      addon = Boolean(rc['generator-ngx-rocket-addon']);
+      addon = Boolean(rc['generator-ngx-rocket']);
     } else {
       this._exit(`No existing app found, use ${chalk.blue('ngx new')} instead`);
     }
     if (addon) {
       args = args.filter(arg => arg !== '--addon' && arg !== '-a');
-      env.lookup(() => env.run(['ngx-rocket-addon'].concat(args), {
+      env.lookup(() => env.run(['ngx-rocket:addon'].concat(args), {
         update,
         packageManager: this._packageManager(),
         'skip-welcome': true
