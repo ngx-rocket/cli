@@ -130,7 +130,7 @@ class NgxCli {
       env.lookup(() => env.run(['ngx-rocket-addon'].concat(args), {
         update,
         packageManager: this._packageManager(),
-        'skip-welcome': true,
+        'skip-welcome': true
       }));
     } else {
       const disabled = this._config.get(disabledAddons);
@@ -239,7 +239,7 @@ class NgxCli {
     let pm = null;
     try {
       const rc = require(path.join(process.cwd(), '.yo-rc.json'));
-      pm = rc[generator].props.packageManager;
+      pm = rc['generator-ngx-rocket'].props.packageManager;
     } catch (err) {
       // Do nothing
     }
