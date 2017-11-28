@@ -14,8 +14,9 @@
 Leverage [ngX-Rocket generator](https://github.com/ngx-rocket/generator-ngx-rocket) with community
 [add-ons](https://www.npmjs.com/search?q=ngx-rocket-addon) and improve your **developer experience**.
 From scaffolding to deployment, use this CLI to accelerate your workflow.
-You can also [make your very own add-on](https://github.com/ngx-rocket/generator-ngx-rocket-addon) directly from the
-CLI, to make your next project even faster! 
+You can also
+[make your very own add-on](https://github.com/ngx-rocket/generator-ngx-rocket/tree/master/generators/addon) directly
+from the CLI, to make your next project even faster! 
 
 ## Installation
 
