@@ -1,3 +1,7 @@
+# 1.6.0
+- Added Yarn package manager option (https://github.com/ngx-rocket/generator-ngx-rocket/issues/49)
+- Removed `generator-ngx-rocket-add` as it now merged in `generator-ngx-rocket` (https://github.com/ngx-rocket/generator-ngx-rocket/issues/176)
+
 # 1.5.2
 - Bumped generators version
 
